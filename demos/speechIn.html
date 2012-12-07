@@ -1,0 +1,46 @@
+
+<html>
+<title>Print what I say</title>
+<style>
+body {
+  text-align: center;
+  margin-top: 110px;
+  font-size: 110px;
+  color: darkgrey;
+}
+</style>
+<body>
+Allow first
+<script>
+
+window.onload = function() {
+  if (window.webkitSpeechRecognition === undefined) {
+    document.body.innerHTML = 'Activate<br/>speech Javascript API first';
+    return;
+  }
+
+  sr = new webkitSpeechRecognition();
+  sr.onresult = function(e) {
+    result = e.result[0].transcript;
+    document.body.innerText = result;
+    if (result.charAt(result.length-1) === '*') {
+      document.body.style.color = 'red';
+    } else {
+      document.body.style.color = 'darkgrey';
+    }
+  }
+  sr.onstart = function() { 
+    document.body.innerText = 'speak now'
+  }
+  sr.onerror = function(e) { 
+    document.body.innerHTML = 'sorry... an error occured.<br/>Refresh the page'
+  }
+  sr.maxAlternatives = 1;
+  sr.lang = navigator.language;
+  sr.continuous = true;
+  sr.interimResults = true;
+  sr.start();
+}
+</script>
+</body>
+</html>
