@@ -1,0 +1,14 @@
+
+<div ng-show="pos < story.length">
+  <form class=form-inline>I'm listening. Say or type: <input autofocus type="text" placeholder="{{story[pos]}}" ng-model="txt"/> 
+  <button type="submit" class="btn" ng-click="input()">Next</button>
+  </form>
+</div>
+
+<ol>
+  <li ng-repeat="word in words">{{word}}</li>
+</ol>
+
+<div ng-show="pos==story.length">
+  <a href="#read" class="btn"><i class="icon-arrow-right"></i> Mad-libify!</a>
+</div>
